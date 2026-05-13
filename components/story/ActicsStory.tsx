@@ -7,7 +7,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import FooterScene from "./FooterScene";
+import Footer from "./Footer";
 import { useLayoutEffect, useRef, useState } from "react";
 import LogoMark from "./LogoMark";
 import FeatureTabs from "./FeatureTabs";
@@ -415,10 +415,6 @@ export default function ActicsStory() {
     ["5vh", "0vh"],
   );
 
-  // const brandsPointerEvents = useTransform(scrollYProgress, (value) =>
-  //   value >= 0.997 && value <= 0.999 ? "auto" : "none",
-  // );
-
   const footerOpacity = useTransform(scrollYProgress, [0.9985, 1], [0, 1]);
 
   return (
@@ -455,7 +451,6 @@ export default function ActicsStory() {
           }}
           className="pointer-events-none absolute inset-0 z-50"
         >
-          {/* INTRODUCING TEXT */}
           <motion.p
             style={{
               opacity: introducingOpacity,
@@ -468,7 +463,6 @@ export default function ActicsStory() {
             Introducing
           </motion.p>
 
-          {/* LOGO + ACTICS LOCKUP */}
           <motion.div
             ref={introLockupRef}
             style={{ x: introLockupX }}
@@ -495,7 +489,6 @@ export default function ActicsStory() {
           </motion.div>
         </motion.div>
 
-        {/* DURABILITY TEXT */}
         <motion.p
           style={{ opacity: durabilityOpacity }}
           className="absolute left-1/2 top-[74vh] z-30 max-w-5xl -translate-x-1/2 -translate-y-1/2 text-center text-[clamp(18px,2.2vw,34px)] uppercase leading-relaxed tracking-wide text-white"
@@ -506,7 +499,6 @@ export default function ActicsStory() {
           demands of high-intensity sports.
         </motion.p>
 
-        {/* ACTICS DIFFERENCE */}
         <motion.section
           style={{ opacity: differenceOpacity }}
           className="absolute inset-0 z-30 overflow-hidden bg-black"
@@ -532,13 +524,11 @@ export default function ActicsStory() {
           </h2>
         </motion.section>
 
-        {/* WHITE ATMOSPHERIC TRANSITION */}
         <motion.div
           style={{ opacity: whiteBgOpacity }}
           className="absolute inset-0 z-20 bg-white"
         />
 
-        {/* ACTICS EDGE: BLACK -> WHITE, COPY TRANSITION SEQUENCE */}
         <motion.section
           style={{
             opacity: edgeSequenceOpacity,
@@ -546,7 +536,6 @@ export default function ActicsStory() {
           }}
           className="absolute inset-0 z-40 overflow-hidden"
         >
-          {/* SECTION LABEL - persists across black and white states */}
           <motion.p
             style={{ color: edgeTopLabelColor }}
             className="absolute left-1/2 top-[12vh] z-20 -translate-x-1/2 text-[clamp(16px,1.4vw,24px)] uppercase tracking-[0.3em]"
@@ -554,7 +543,6 @@ export default function ActicsStory() {
             THE ACTICS EDGE
           </motion.p>
 
-          {/* CENTER STATEMENT - black-state only */}
           <motion.h2
             style={{
               opacity: activeLifestyleOpacity,
@@ -567,7 +555,6 @@ export default function ActicsStory() {
             ACTIVE LIFESTYLES
           </motion.h2>
 
-          {/* FIRST COPY: starts at lower black position, rises into the white copy slot */}
           <motion.p
             style={{
               opacity: firstEdgeCopyOpacity,
@@ -582,7 +569,6 @@ export default function ActicsStory() {
             pushing their limits.
           </motion.p>
 
-          {/* SECOND COPY: replaces the first at the exact settled position */}
           <motion.p
             style={{ opacity: secondEdgeCopyOpacity }}
             className="absolute left-1/2 top-[26vh] z-30 max-w-4xl -translate-x-1/2 text-center text-[clamp(12px,1.4vw,24px)] font-medium leading-relaxed text-zinc-800"
@@ -592,7 +578,6 @@ export default function ActicsStory() {
             sports, with clarity that lasts.
           </motion.p>
 
-          {/* THIRD COPY: replaces the second at the exact same settled position */}
           <motion.p
             style={{ opacity: thirdEdgeCopyOpacity }}
             className="absolute left-1/2 top-[26vh] z-30 max-w-4xl -translate-x-1/2 text-center text-[clamp(12px,1.4vw,24px)] font-medium leading-relaxed text-zinc-800"
@@ -602,7 +587,6 @@ export default function ActicsStory() {
             <span className="text-[#00B8A9]">action-packed</span> adventure.
           </motion.p>
 
-          {/* PRODUCT IMAGE: rises in as the background turns white */}
           <motion.img
             style={{
               opacity: edgeProductOpacity,
@@ -620,7 +604,6 @@ export default function ActicsStory() {
           style={{ opacity: innovationOpacity }}
           className="absolute inset-0 z-50 bg-white text-zinc-700"
         >
-          {/* Product image deliberately stays behind the type layers. */}
           <img
             src={imageSet.macroThree}
             alt="Innovation glasses"
@@ -778,7 +761,6 @@ export default function ActicsStory() {
             </h2>
 
             <div className="relative mt-[3.8vh] h-[74vh] w-full overflow-hidden bg-black">
-              {/* LEFT CLICK AREA - TOM ARCHER */}
               <button
                 type="button"
                 onClick={() => setActiveBrand("tom-archer")}
@@ -788,7 +770,6 @@ export default function ActicsStory() {
                 aria-label="Show Tom Archer"
               />
 
-              {/* RIGHT CLICK AREA - MARC FABIEN */}
               <button
                 type="button"
                 onClick={() => setActiveBrand("marc-fabien")}
@@ -798,7 +779,6 @@ export default function ActicsStory() {
                 aria-label="Show Marc Fabien"
               />
 
-              {/* ACTIVE BACKGROUND */}
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeBrand}
@@ -817,7 +797,6 @@ export default function ActicsStory() {
 
               <div className="absolute inset-0 bg-black/55" />
 
-              {/* ACTIVE WIDTH SHADE */}
               <motion.div
                 animate={{
                   left: activeBrand === "tom-archer" ? "0%" : "40%",
@@ -830,7 +809,6 @@ export default function ActicsStory() {
                 className="absolute top-0 z-10 h-full bg-black/20"
               />
 
-              {/* DIVIDER */}
               <motion.div
                 animate={{
                   left: activeBrand === "tom-archer" ? "60%" : "40%",
@@ -842,7 +820,6 @@ export default function ActicsStory() {
                 className="absolute top-0 z-20 h-full w-px bg-white/25"
               />
 
-              {/* TOM ARCHER SIDE LABEL */}
               <motion.div
                 animate={{
                   left: activeBrand === "tom-archer" ? "5vw" : "6vw",
@@ -880,7 +857,6 @@ export default function ActicsStory() {
                 )}
               </motion.div>
 
-              {/* MARC FABIEN SIDE LABEL */}
               <motion.div
                 animate={{
                   left: activeBrand === "marc-fabien" ? "47%" : "74%",
@@ -930,7 +906,7 @@ export default function ActicsStory() {
               : "pointer-events-none"
           }`}
         >
-          <FooterScene />
+          <Footer />
         </motion.div>
       </div>
     </main>

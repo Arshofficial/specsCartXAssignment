@@ -46,36 +46,3 @@ export const featureTabs = {
 } as const;
 
 export type FeatureKey = keyof typeof featureTabs;
-
-export const sportCards = [
-  {
-    label: "Cycling",
-    image:
-      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    label: "Football",
-    image:
-      "https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    label: "Gym",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    label: "Golf",
-    image:
-      "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    label: "Running",
-    image:
-      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    label: "Tennis",
-    image:
-      "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=1200&auto=format&fit=crop",
-  },
-] as const;

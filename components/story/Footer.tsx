@@ -1,6 +1,6 @@
 "use client";
 
-export default function FooterScene() {
+export default function Footer() {
   return (
     <section className="relative h-screen bg-white">
       <div className="flex h-[18vh] items-center justify-between gap-8 border-y border-zinc-200 bg-white px-[7vw] text-zinc-900">

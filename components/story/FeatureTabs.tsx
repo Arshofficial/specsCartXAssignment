@@ -14,8 +14,6 @@ const featureTargets: Record<
     y: number;
   }
 > = {
-  // These percentages are relative to the product image stage.
-  // They intentionally point to the same product image while the copy updates.
   lens: { x: 35, y: 47 },
   frame: { x: 40, y: 37 },
   design: { x: 72, y: 30 },
@@ -27,7 +25,6 @@ export default function FeatureTabs({ active }: Props) {
 
   return (
     <section className="absolute inset-0 overflow-hidden bg-white text-zinc-800">
-      {/* Shared nav — this lands where the moving nav from the Innovation scene resolves. */}
       <div className="absolute left-[8vw] top-[18vh] z-30 flex w-[43vw] items-center justify-between text-[clamp(12px,1.5vw,25px)] font-light tracking-wide">
         {(Object.keys(featureTabs) as FeatureKey[]).map((key, index) => (
           <div
@@ -47,7 +44,6 @@ export default function FeatureTabs({ active }: Props) {
         ))}
       </div>
 
-      {/* Left-side copy changes while the product image stays static. */}
       <AnimatePresence mode="wait">
         <motion.div
           key={active}
@@ -67,7 +63,6 @@ export default function FeatureTabs({ active }: Props) {
         </motion.div>
       </AnimatePresence>
 
-      {/* One static product image for Lens / Frame / Design, per the current asset strategy. */}
       <div className="absolute right-[9vw] top-[20vh] h-[52vh] w-[46vw]">
         <img
           src={imageSet.macroThree}
@@ -75,7 +70,6 @@ export default function FeatureTabs({ active }: Props) {
           className="absolute inset-0 h-full w-full object-contain"
         />
 
-        {/* The pointer animates to lens / frame / design without swapping the image. */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`feature-pointer-${active}`}
