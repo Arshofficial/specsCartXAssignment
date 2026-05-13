@@ -181,32 +181,41 @@ export default function ActicsStory() {
 
   const introLockupX = useTransform(
     scrollYProgress,
-    [0.05, 0.17],
+    [0.018, 0.105],
     [introLockupOffset, 0],
   );
 
   const persistentLogoRotate = useTransform(
     scrollYProgress,
-    [0.05, 0.17],
+    [0.018, 0.105],
     [0, 60],
   );
 
-  const acticsTextOpacity = useTransform(scrollYProgress, [0.11, 0.17], [0, 1]);
+  const logoIntroScale = useTransform(
+    scrollYProgress,
+    [0, 0.018, 0.105],
+    [1.28, 1.28, 1],
+  );
+
+  const acticsTextOpacity = useTransform(scrollYProgress, [0.07, 0.12], [0, 1]);
 
   const acticsTextVisibility = useTransform(scrollYProgress, (value) =>
     value < 0.105 || value >= 0.34 ? "hidden" : "visible",
   );
 
-  const acticsTextX = useTransform(scrollYProgress, [0.11, 0.17], [150, 0]);
+  const acticsTextX = useTransform(scrollYProgress, [0.07, 0.12], [150, 0]);
 
   const introducingOpacity = useTransform(
     scrollYProgress,
-    [0.12, 0.18],
+    [0.075, 0.13],
     [0, 1],
   );
 
   const introducingVisibility = useTransform(scrollYProgress, (value) =>
     value < 0.115 || value >= 0.34 ? "hidden" : "visible",
+  );
+  const introBlackBgVisibility = useTransform(scrollYProgress, (value) =>
+    value >= 0.34 ? "hidden" : "visible",
   );
 
   const introducingX = useTransform(scrollYProgress, [0.12, 0.18], [110, 0]);
@@ -221,8 +230,8 @@ export default function ActicsStory() {
 
   const darkRevealOpacity = useTransform(
     scrollYProgress,
-    [0.18, 0.28, 0.43],
-    [0, 1, 1],
+    [0.18, 0.27, 0.43, 0.48],
+    [0, 1, 1, 0],
   );
 
   const darkRevealScale = useTransform(
@@ -233,7 +242,7 @@ export default function ActicsStory() {
 
   const durabilityOpacity = useTransform(
     scrollYProgress,
-    [0.345, 0.395, 0.43],
+    [0.345, 0.395, 0.455],
     [0, 1, 0],
   );
 
@@ -393,33 +402,19 @@ export default function ActicsStory() {
 
   const sportsOpacity = useTransform(
     scrollYProgress,
-    [0.984, 0.988, 0.991, 0.993],
-    [0, 1, 1, 0],
-  );
-
-  const brandsOpacity = useTransform(
-    scrollYProgress,
-    [0.9915, 0.994, 0.999],
+    [0.984, 0.988, 1],
     [0, 1, 1],
   );
 
   const sportsY = useTransform(
     scrollYProgress,
-    [0.984, 0.988, 0.993, 0.996],
-    ["4vh", "0vh", "0vh", "-4vh"],
+    [0.984, 0.988, 0.996, 1],
+    ["4vh", "0vh", "-55vh", "-95vh"],
   );
-
-  const brandsY = useTransform(
-    scrollYProgress,
-    [0.9915, 0.994],
-    ["5vh", "0vh"],
-  );
-
-  const footerOpacity = useTransform(scrollYProgress, [0.9985, 1], [0, 1]);
 
   return (
-    <main ref={ref} className="relative h-[1100vh] bg-black">
-      <div className="sticky top-0 h-screen w-screen overflow-hidden bg-black">
+    <main ref={ref} className="relative h-[1500vh] bg-black">
+      <div className="sticky top-0 h-screen w-screen overflow-hidden bg-white">
         <motion.section
           style={{
             opacity: darkRevealOpacity,
@@ -427,21 +422,28 @@ export default function ActicsStory() {
           }}
           className="absolute inset-0 z-10"
         >
-          <img
-            src={imageSet.darkHero}
-            alt="Actics dark cinematic reveal"
-            className="h-full w-full object-cover opacity-40"
+          <video
+            src="/videos/actics-reveal.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="h-full w-full object-cover opacity-55"
           />
-          <div className="absolute inset-0 bg-black/65" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent,rgba(0,0,0,0.85))]" />
+
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent,rgba(0,0,0,0.82))]" />
         </motion.section>
 
         <motion.div
-          style={{ opacity: introBlackBgOpacity }}
+          style={{
+            opacity: introBlackBgOpacity,
+            visibility: introBlackBgVisibility,
+          }}
           className="pointer-events-none absolute inset-0 z-20 bg-black"
         />
 
-        {/* COMPLETE INTRO CLUSTER */}
         <motion.div
           style={{
             opacity: introClusterOpacity,
@@ -470,8 +472,11 @@ export default function ActicsStory() {
           >
             <motion.div
               ref={introLogoSlotRef}
-              style={{ rotate: persistentLogoRotate }}
-              className="shrink-0"
+              style={{
+                rotate: persistentLogoRotate,
+                scale: logoIntroScale,
+              }}
+              className="shrink-0 origin-center"
             >
               <LogoMark className="text-[clamp(80px,10vw,150px)] text-[#00B8A9]" />
             </motion.div>
@@ -599,7 +604,6 @@ export default function ActicsStory() {
           />
         </motion.section>
 
-        {/* INNOVATION & TECHNOLOGY */}
         <motion.section
           style={{ opacity: innovationOpacity }}
           className="absolute inset-0 z-50 bg-white text-zinc-700"
@@ -656,7 +660,6 @@ export default function ActicsStory() {
           </motion.div>
         </motion.section>
 
-        {/* FEATURE TABS */}
         <motion.section
           style={{ opacity: featureOpacity }}
           className="absolute inset-0 z-[60]"
@@ -664,26 +667,21 @@ export default function ActicsStory() {
           <FeatureTabs active={activeFeature} />
         </motion.section>
 
-        {/* SPORTS SECTION */}
         <motion.section
           style={{
             opacity: sportsOpacity,
             y: sportsY,
           }}
-          className={`absolute inset-0 z-[65] bg-white px-[4vw] pt-[5vh] pb-[2vh] text-zinc-800 ${
-            activeTailScene === "sports"
-              ? "pointer-events-auto"
-              : "pointer-events-none"
-          }`}
+          className="absolute inset-0 z-[65] pointer-events-auto bg-white px-[4vw] pt-[5vh]  text-zinc-800"
         >
-          <div className="mx-auto flex h-full w-full max-w-[1440px] flex-col items-center justify-start">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center justify-start">
             <h2 className="mt-[1vh] text-center text-[clamp(30px,3vw,48px)] font-semibold">
               Eyewear For Sports
             </h2>
 
             <div
               className="mt-[5vh] grid w-full grid-cols-6 overflow-hidden border border-zinc-200"
-              // onMouseLeave={() => setActiveSport("cycling")}
+              onMouseLeave={() => setActiveSport("cycling")}
             >
               {sportsCards.map((card) => {
                 const isActive = card.key === activeSport;
@@ -694,7 +692,7 @@ export default function ActicsStory() {
                     type="button"
                     onMouseEnter={() => setActiveSport(card.key)}
                     onFocus={() => setActiveSport(card.key)}
-                    className="group relative h-[clamp(170px,24vh,260px)] overflow-hidden border-r border-white/60 last:border-r-0"
+                    className="group relative h-[clamp(130px,18vh,190px)] overflow-hidden border-r border-white/60 last:border-r-0"
                   >
                     <img
                       src={card.image}
@@ -741,20 +739,7 @@ export default function ActicsStory() {
               </AnimatePresence>
             </div>
           </div>
-        </motion.section>
 
-        {/* OTHER BRANDS SECTION */}
-        <motion.section
-          style={{
-            opacity: brandsOpacity,
-            y: brandsY,
-          }}
-          className={`absolute inset-0 z-[68] bg-white px-[4vw] py-[6vh] text-zinc-800 ${
-            activeTailScene === "brands"
-              ? "pointer-events-auto"
-              : "pointer-events-none"
-          }`}
-        >
           <div className="mx-auto flex h-full w-full max-w-[1440px] flex-col items-center">
             <h2 className="mt-[1vh] text-center text-[clamp(30px,3vw,48px)] font-semibold">
               Our Other Brands
@@ -830,7 +815,7 @@ export default function ActicsStory() {
                   duration: 0.7,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="pointer-events-none absolute z-20 text-white"
+                className="pointer-events-none absolute z-20 text-white cursor-pointer"
               >
                 <p className="text-[clamp(11px,0.85vw,14px)] font-semibold tracking-[0.08em]">
                   SPECSCART.
@@ -850,7 +835,7 @@ export default function ActicsStory() {
                       {brandPanels["tom-archer"].description}
                     </p>
 
-                    <span className="mt-8 inline-block border-b border-white/80 pb-1 text-[clamp(12px,0.9vw,15px)] font-medium text-white">
+                    <span className="mt-8 inline-block border-b border-white/80 pb-1 text-[clamp(12px,0.9vw,15px)] font-medium text-white cursor-pointer">
                       Know the Brand
                     </span>
                   </motion.div>
@@ -867,7 +852,7 @@ export default function ActicsStory() {
                   duration: 0.7,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="pointer-events-none absolute z-20 max-w-[420px] text-white"
+                className="pointer-events-none absolute z-20 max-w-[420px] text-white cursor-pointer"
               >
                 <p className="text-[clamp(11px,0.85vw,14px)] font-semibold tracking-[0.08em]">
                   SPECSCART.
@@ -887,7 +872,7 @@ export default function ActicsStory() {
                       {brandPanels["marc-fabien"].description}
                     </p>
 
-                    <span className="mt-8 inline-block border-b border-white/80 pb-1 text-[clamp(12px,0.9vw,15px)] font-medium text-white">
+                    <span className="mt-8 inline-block border-b border-white/80 pb-1 text-[clamp(12px,0.9vw,15px)] font-medium text-white cursor-pointer">
                       Know the Brand
                     </span>
                   </motion.div>
@@ -895,19 +880,10 @@ export default function ActicsStory() {
               </motion.div>
             </div>
           </div>
+          <section className="relative left-1/2 mt-0 w-screen -translate-x-1/2 bg-[#3A0D3F] text-white">
+            <Footer />
+          </section>
         </motion.section>
-
-        {/* FOOTER */}
-        <motion.div
-          style={{ opacity: footerOpacity }}
-          className={`absolute inset-0 z-[70] ${
-            activeTailScene === "footer"
-              ? "pointer-events-auto"
-              : "pointer-events-none"
-          }`}
-        >
-          <Footer />
-        </motion.div>
       </div>
     </main>
   );
